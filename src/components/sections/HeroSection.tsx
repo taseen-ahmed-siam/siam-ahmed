@@ -79,15 +79,15 @@ const HeroSection = () => {
         >
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-secondary border border-border mb-6 sm:mb-8"
           >
-            <Sparkles size={16} className="text-primary" />
-            <span className="text-sm text-muted-foreground">Available for freelance work</span>
+            <Sparkles size={14} className="text-primary sm:w-4 sm:h-4" />
+            <span className="text-xs sm:text-sm text-muted-foreground">Available for freelance work</span>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight mb-6"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight mb-4 sm:mb-6 px-2"
           >
             Crafting Digital
             <br />
@@ -96,7 +96,7 @@ const HeroSection = () => {
 
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 px-4"
           >
             I'm a creative developer and designer passionate about building 
             beautiful, functional websites and applications that make a lasting impression.
@@ -104,18 +104,20 @@ const HeroSection = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4"
           >
             <Button 
               variant="hero" 
-              size="xl"
+              size="lg"
+              className="w-full sm:w-auto"
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
             >
               View My Work
             </Button>
             <Button 
               variant="heroOutline" 
-              size="xl"
+              size="lg"
+              className="w-full sm:w-auto"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Get In Touch
