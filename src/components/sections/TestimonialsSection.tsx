@@ -79,7 +79,7 @@ const TestimonialsSection = () => {
           >
             Testimonials
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4 mb-4 sm:mb-6">
             What Clients <span className="text-gradient">Say</span>
           </h2>
         </motion.div>
@@ -90,11 +90,11 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="max-w-4xl mx-auto"
         >
-          <div className="relative bg-card rounded-2xl p-8 md:p-12 border border-border shadow-card overflow-hidden">
-            <Quote className="absolute top-8 left-8 text-primary/20" size={60} />
+          <div className="relative bg-card rounded-2xl p-6 sm:p-8 md:p-12 border border-border shadow-card overflow-hidden">
+            <Quote className="absolute top-4 sm:top-8 left-4 sm:left-8 text-primary/20 w-10 h-10 sm:w-[60px] sm:h-[60px]" />
             
-            <div className="relative z-10 min-h-[200px]">
-              <div className="flex items-center gap-1 mb-6">
+            <div className="relative z-10 min-h-[180px] sm:min-h-[200px]">
+              <div className="flex items-center gap-1 mb-4 sm:mb-6">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                   <motion.div
                     key={i}
@@ -102,7 +102,7 @@ const TestimonialsSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <Star size={20} className="fill-primary text-primary" />
+                    <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-primary text-primary" />
                   </motion.div>
                 ))}
               </div>
@@ -117,20 +117,20 @@ const TestimonialsSection = () => {
                   exit="exit"
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 >
-                  <p className="text-xl md:text-2xl font-display leading-relaxed mb-8">
+                  <p className="text-lg sm:text-xl md:text-2xl font-display leading-relaxed mb-6 sm:mb-8">
                     "{testimonials[currentIndex].content}"
                   </p>
                   
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <motion.img
                       whileHover={{ scale: 1.1 }}
                       src={testimonials[currentIndex].image}
                       alt={testimonials[currentIndex].name}
-                      className="w-14 h-14 rounded-full object-cover border-2 border-primary"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-primary"
                     />
                     <div>
-                      <h4 className="font-semibold">{testimonials[currentIndex].name}</h4>
-                      <p className="text-muted-foreground text-sm">{testimonials[currentIndex].role}</p>
+                      <h4 className="font-semibold text-sm sm:text-base">{testimonials[currentIndex].name}</h4>
+                      <p className="text-muted-foreground text-xs sm:text-sm">{testimonials[currentIndex].role}</p>
                     </div>
                   </div>
                 </motion.div>

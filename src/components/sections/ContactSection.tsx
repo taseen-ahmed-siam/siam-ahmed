@@ -107,13 +107,13 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-card relative">
-      <div className="container mx-auto px-6" ref={ref}>
+    <section id="contact" className="py-16 sm:py-24 bg-card relative">
+      <div className="container mx-auto px-4 sm:px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -123,43 +123,43 @@ const ContactSection = () => {
           >
             Contact
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4 mb-4 sm:mb-6">
             Let's Work <span className="text-gradient">Together</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg px-2">
             Have a project in mind? I'd love to hear about it. Send me a message and let's create something amazing.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 max-w-5xl mx-auto">
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="space-y-8"
+            className="space-y-4 sm:space-y-8"
           >
             {contactInfo.map((info) => (
               <motion.div
                 key={info.title}
                 variants={itemVariants}
                 whileHover={{ x: 10, transition: { duration: 0.2 } }}
-                className="flex items-start gap-4"
+                className="flex items-start gap-3 sm:gap-4"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
-                  className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0"
                 >
-                  <info.icon size={20} className="text-primary-foreground" />
+                  <info.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
                 </motion.div>
                 <div>
-                  <h3 className="font-semibold mb-1">{info.title}</h3>
+                  <h3 className="font-semibold mb-0.5 sm:mb-1 text-sm sm:text-base">{info.title}</h3>
                   {info.href ? (
-                    <a href={info.href} className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href={info.href} className="text-muted-foreground hover:text-primary transition-colors text-sm sm:text-base break-all">
                       {info.value}
                     </a>
                   ) : (
-                    <p className="text-muted-foreground">{info.value}</p>
+                    <p className="text-muted-foreground text-sm sm:text-base">{info.value}</p>
                   )}
                 </div>
               </motion.div>
@@ -176,17 +176,17 @@ const ContactSection = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, type: "spring" }}
-                className="bg-background rounded-xl p-8 border border-border text-center"
+                className="bg-background rounded-xl p-6 sm:p-8 border border-border text-center"
               >
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 >
-                  <CheckCircle size={60} className="mx-auto text-primary mb-4" />
+                  <CheckCircle className="mx-auto text-primary mb-4 w-12 h-12 sm:w-[60px] sm:h-[60px]" />
                 </motion.div>
-                <h3 className="text-2xl font-display font-semibold mb-2">Thank You!</h3>
-                <p className="text-muted-foreground">
+                <h3 className="text-xl sm:text-2xl font-display font-semibold mb-2">Thank You!</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">
                   Your message has been sent. I'll get back to you as soon as possible.
                 </p>
                 <Button

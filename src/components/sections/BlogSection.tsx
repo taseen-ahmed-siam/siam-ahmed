@@ -94,10 +94,10 @@ const BlogSection = () => {
           >
             Blog
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4 mb-4 sm:mb-6">
             Latest <span className="text-gradient">Insights</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg px-4">
             Thoughts, tutorials, and insights from my journey in design and development.
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ const BlogSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
           {blogPosts.map((post) => (
             <motion.article
@@ -131,14 +131,14 @@ const BlogSection = () => {
                 />
               </div>
               
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+              <div className="p-4 sm:p-6">
+                <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
                   <span className="flex items-center gap-1">
-                    <Calendar size={14} />
+                    <Calendar size={12} className="sm:w-3.5 sm:h-3.5" />
                     {post.date}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock size={14} />
+                    <Clock size={12} className="sm:w-3.5 sm:h-3.5" />
                     {post.readTime}
                   </span>
                 </div>
@@ -147,11 +147,11 @@ const BlogSection = () => {
                   {post.category}
                 </span>
                 
-                <h3 className="text-xl font-display font-semibold mt-3 mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-lg sm:text-xl font-display font-semibold mt-2 sm:mt-3 mb-2 group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h3>
                 
-                <p className="text-muted-foreground text-sm line-clamp-2">
+                <p className="text-muted-foreground text-xs sm:text-sm line-clamp-2">
                   {post.excerpt}
                 </p>
                 
@@ -182,7 +182,7 @@ const BlogSection = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-card border border-border rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-card"
+              className="bg-card border border-border rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-card mx-4"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative aspect-video">
@@ -205,15 +205,15 @@ const BlogSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="p-8"
+                className="p-4 sm:p-8"
               >
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-4">
                   <span className="flex items-center gap-1">
-                    <Calendar size={14} />
+                    <Calendar size={12} className="sm:w-3.5 sm:h-3.5" />
                     {selectedPost.date}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock size={14} />
+                    <Clock size={12} className="sm:w-3.5 sm:h-3.5" />
                     {selectedPost.readTime}
                   </span>
                   <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
@@ -221,7 +221,7 @@ const BlogSection = () => {
                   </span>
                 </div>
                 
-                <h2 className="text-3xl font-display font-bold mb-4">
+                <h2 className="text-2xl sm:text-3xl font-display font-bold mb-4">
                   {selectedPost.title}
                 </h2>
                 

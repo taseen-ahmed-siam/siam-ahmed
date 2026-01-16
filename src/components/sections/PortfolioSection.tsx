@@ -94,10 +94,10 @@ const PortfolioSection = () => {
           >
             Portfolio
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4 mb-4 sm:mb-6">
             Featured <span className="text-gradient">Work</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg px-4">
             A selection of projects I'm proud of, showcasing my skills in design and development.
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ const PortfolioSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
           style={{ perspective: "1000px" }}
         >
           {projects.map((project) => (
@@ -131,10 +131,10 @@ const PortfolioSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
                 <span className="text-primary text-xs uppercase tracking-wider">{project.category}</span>
-                <h3 className="text-xl font-display font-semibold mt-1 mb-2">{project.title}</h3>
-                <p className="text-muted-foreground text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                <h3 className="text-lg sm:text-xl font-display font-semibold mt-1 mb-2">{project.title}</h3>
+                <p className="text-muted-foreground text-xs sm:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 line-clamp-2">
                   {project.description}
                 </p>
                 

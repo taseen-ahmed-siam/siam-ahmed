@@ -60,12 +60,12 @@ const AboutSection = () => {
           >
             About Me
           </motion.span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4 mb-4 sm:mb-6 px-2">
             Turning Ideas Into
             <br />
             <span className="text-gradient">Reality</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg px-4">
             With over 5 years of experience in web development and design, I specialize in 
             creating digital experiences that are both visually stunning and highly functional.
           </p>
@@ -75,24 +75,24 @@ const AboutSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
         >
           {skills.map((skill) => (
             <motion.div
               key={skill.title}
               variants={itemVariants}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="bg-background rounded-xl p-6 border border-border card-hover group"
+              className="bg-background rounded-xl p-4 sm:p-6 border border-border card-hover group"
             >
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.3 }}
-                className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-3 sm:mb-4"
               >
-                <skill.icon size={24} className="text-primary-foreground" />
+                <skill.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-foreground" />
               </motion.div>
-              <h3 className="text-xl font-display font-semibold mb-2">{skill.title}</h3>
-              <p className="text-muted-foreground text-sm">{skill.description}</p>
+              <h3 className="text-lg sm:text-xl font-display font-semibold mb-1 sm:mb-2">{skill.title}</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">{skill.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -101,7 +101,7 @@ const AboutSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="mt-16 grid md:grid-cols-3 gap-8 text-center"
+          className="mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 text-center"
         >
           {[
             { value: "50+", label: "Projects Completed" },
@@ -112,17 +112,17 @@ const AboutSection = () => {
               key={stat.label}
               variants={statVariants}
               whileHover={{ scale: 1.05 }}
-              className="p-6"
+              className="p-3 sm:p-6"
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1, type: "spring", stiffness: 100 }}
-                className="text-5xl md:text-6xl font-display font-bold text-gradient mb-2"
+                className="text-3xl sm:text-5xl md:text-6xl font-display font-bold text-gradient mb-1 sm:mb-2"
               >
                 {stat.value}
               </motion.div>
-              <p className="text-muted-foreground">{stat.label}</p>
+              <p className="text-muted-foreground text-xs sm:text-sm">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
