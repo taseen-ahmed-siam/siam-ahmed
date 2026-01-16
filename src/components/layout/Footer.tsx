@@ -1,14 +1,18 @@
 import { Github, Linkedin, Twitter, Instagram, Mail } from "lucide-react";
-
-const socialLinks = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Mail, href: "mailto:hello@example.com", label: "Email" },
-];
+import { useSiteSettings, SocialSettings, ContactSettings } from "@/hooks/useSiteSettings";
 
 const Footer = () => {
+  const { data: socialSettings } = useSiteSettings<SocialSettings>('social');
+  const { data: contactSettings } = useSiteSettings<ContactSettings>('contact');
+
+  const socialLinks = [
+    { icon: Github, href: socialSettings?.github || "https://github.com", label: "GitHub" },
+    { icon: Linkedin, href: socialSettings?.linkedin || "https://linkedin.com", label: "LinkedIn" },
+    { icon: Twitter, href: socialSettings?.twitter || "https://twitter.com", label: "Twitter" },
+    { icon: Instagram, href: socialSettings?.instagram || "https://instagram.com", label: "Instagram" },
+    { icon: Mail, href: `mailto:${contactSettings?.email || "hello@example.com"}`, label: "Email" },
+  ];
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
