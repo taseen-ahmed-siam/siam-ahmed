@@ -106,10 +106,18 @@ const HeroSection = () => {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button variant="hero" size="xl">
+            <Button 
+              variant="hero" 
+              size="xl"
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               View My Work
             </Button>
-            <Button variant="heroOutline" size="xl">
+            <Button 
+              variant="heroOutline" 
+              size="xl"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Get In Touch
             </Button>
           </motion.div>
