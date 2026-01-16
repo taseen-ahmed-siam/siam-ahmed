@@ -13,9 +13,38 @@ const contactSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters").max(1000),
 });
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
+const formVariants = {
+  hidden: { opacity: 0, x: 30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6 },
+  },
+};
+
 const ContactSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -53,16 +82,29 @@ const ContactSection = () => {
     });
   };
 
+  const contactInfo = [
+    { icon: Mail, title: "Email", value: "hello@example.com", href: "mailto:hello@example.com" },
+    { icon: Phone, title: "Phone", value: "+1 (234) 567-890", href: "tel:+1234567890" },
+    { icon: MapPin, title: "Location", value: "San Francisco, CA", href: null },
+  ];
+
   return (
     <section id="contact" className="py-24 bg-card relative">
       <div className="container mx-auto px-6" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm uppercase tracking-widest font-medium">Contact</span>
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-primary text-sm uppercase tracking-widest font-medium"
+          >
+            Contact
+          </motion.span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
             Let's Work <span className="text-gradient">Together</span>
           </h2>
@@ -73,54 +115,58 @@ const ContactSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
             className="space-y-8"
           >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                <Mail size={20} className="text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Email</h3>
-                <a href="mailto:hello@example.com" className="text-muted-foreground hover:text-primary transition-colors">
-                  hello@example.com
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                <Phone size={20} className="text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Phone</h3>
-                <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                  +1 (234) 567-890
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                <MapPin size={20} className="text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Location</h3>
-                <p className="text-muted-foreground">San Francisco, CA</p>
-              </div>
-            </div>
+            {contactInfo.map((info) => (
+              <motion.div
+                key={info.title}
+                variants={itemVariants}
+                whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                className="flex items-start gap-4"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0"
+                >
+                  <info.icon size={20} className="text-primary-foreground" />
+                </motion.div>
+                <div>
+                  <h3 className="font-semibold mb-1">{info.title}</h3>
+                  {info.href ? (
+                    <a href={info.href} className="text-muted-foreground hover:text-primary transition-colors">
+                      {info.value}
+                    </a>
+                  ) : (
+                    <p className="text-muted-foreground">{info.value}</p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            variants={formVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
           >
             {isSubmitted ? (
-              <div className="bg-background rounded-xl p-8 border border-border text-center">
-                <CheckCircle size={60} className="mx-auto text-primary mb-4" />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, type: "spring" }}
+                className="bg-background rounded-xl p-8 border border-border text-center"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                >
+                  <CheckCircle size={60} className="mx-auto text-primary mb-4" />
+                </motion.div>
                 <h3 className="text-2xl font-display font-semibold mb-2">Thank You!</h3>
                 <p className="text-muted-foreground">
                   Your message has been sent. I'll get back to you as soon as possible.
@@ -132,10 +178,17 @@ const ContactSection = () => {
                 >
                   Send Another Message
                 </Button>
-              </div>
+              </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-background rounded-xl p-8 border border-border space-y-6">
-                <div>
+              <motion.form
+                onSubmit={handleSubmit}
+                className="bg-background rounded-xl p-8 border border-border space-y-6"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.3 }}
+                >
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name
                   </label>
@@ -147,9 +200,13 @@ const ContactSection = () => {
                     className={errors.name ? "border-destructive" : ""}
                   />
                   {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
-                </div>
+                </motion.div>
 
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.4 }}
+                >
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Email
                   </label>
@@ -162,9 +219,13 @@ const ContactSection = () => {
                     className={errors.email ? "border-destructive" : ""}
                   />
                   {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
-                </div>
+                </motion.div>
 
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.5 }}
+                >
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Message
                   </label>
@@ -177,24 +238,35 @@ const ContactSection = () => {
                     className={errors.message ? "border-destructive" : ""}
                   />
                   {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
-                </div>
+                </motion.div>
 
-                <Button
-                  type="submit"
-                  variant="hero"
-                  size="lg"
-                  className="w-full"
-                  disabled={isSubmitting}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.6 }}
                 >
-                  {isSubmitting ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      Send Message <Send size={18} />
-                    </>
-                  )}
-                </Button>
-              </form>
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    size="lg"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <motion.span
+                        animate={{ opacity: [1, 0.5, 1] }}
+                        transition={{ duration: 1, repeat: Infinity }}
+                      >
+                        Sending...
+                      </motion.span>
+                    ) : (
+                      <>
+                        Send Message <Send size={18} />
+                      </>
+                    )}
+                  </Button>
+                </motion.div>
+              </motion.form>
             )}
           </motion.div>
         </div>
