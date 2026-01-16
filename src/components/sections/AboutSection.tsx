@@ -1,8 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Palette, Lightbulb, Zap } from "lucide-react";
+import { useSiteSettings, AboutSettings } from "@/hooks/useSiteSettings";
 
-const skills = [
+const defaultSkills = [
   { icon: Code2, title: "Development", description: "Clean, efficient code using modern frameworks and best practices" },
   { icon: Palette, title: "Design", description: "Beautiful interfaces with attention to detail and user experience" },
   { icon: Lightbulb, title: "Strategy", description: "Thoughtful solutions that align with your business goals" },
@@ -42,6 +43,11 @@ const statVariants = {
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data: aboutSettings } = useSiteSettings<AboutSettings>('about');
+
+  const title = aboutSettings?.title || "About Me";
+  const description = aboutSettings?.description || "With over 5 years of experience in web development and design, I specialize in creating digital experiences that are both visually stunning and highly functional.";
+  const skills = aboutSettings?.skills || [];
 
   return (
     <section id="about" className="py-24 bg-card relative">
@@ -58,7 +64,7 @@ const AboutSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-primary text-sm uppercase tracking-widest font-medium"
           >
-            About Me
+            {title}
           </motion.span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mt-4 mb-4 sm:mb-6 px-2">
             Turning Ideas Into
@@ -66,8 +72,7 @@ const AboutSection = () => {
             <span className="text-gradient">Reality</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg px-4">
-            With over 5 years of experience in web development and design, I specialize in 
-            creating digital experiences that are both visually stunning and highly functional.
+            {description}
           </p>
         </motion.div>
 
@@ -77,7 +82,7 @@ const AboutSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
         >
-          {skills.map((skill) => (
+          {defaultSkills.map((skill) => (
             <motion.div
               key={skill.title}
               variants={itemVariants}
@@ -96,6 +101,28 @@ const AboutSection = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Skills badges from database */}
+        {skills.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-2 sm:gap-3"
+          >
+            {skills.map((skill, index) => (
+              <motion.span
+                key={skill}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
+                className="px-3 py-1.5 sm:px-4 sm:py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium"
+              >
+                {skill}
+              </motion.span>
+            ))}
+          </motion.div>
+        )}
 
         <motion.div
           variants={containerVariants}
