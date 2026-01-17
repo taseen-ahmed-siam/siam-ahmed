@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+// IMPORT EMAILJS
+import emailjs from '@emailjs/browser';
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -70,16 +71,20 @@ const ContactSection = () => {
 
     setIsSubmitting(true);
     
-    try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        },
-      });
+    // --- EMAILJS CONFIGURATION ---
+    const serviceID = "service_vgqwr6h"; 
+    const templateID = "template_4hp4v9s"; 
+    const publicKey = "5uUVJGAN2ngbcs9qo"; 
 
-      if (error) throw error;
+    // These parameters must match the {{variables}} in your EmailJS template
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    try {
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
 
       setIsSubmitted(true);
       setFormData({ name: "", email: "", message: "" });
