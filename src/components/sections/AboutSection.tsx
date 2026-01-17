@@ -84,7 +84,7 @@ const AboutSection = () => {
               <div className="relative">
                 <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
                   <img 
-                    src={https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png} 
+                    src={imageUrl} 
                     alt="Profile" 
                     className="w-full h-full object-cover"
                   />
