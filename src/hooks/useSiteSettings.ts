@@ -8,12 +8,14 @@ export interface HeroSettings {
   description: string;
   ctaPrimary: string;
   ctaSecondary: string;
+  imageUrl?: string;
 }
 
 export interface AboutSettings {
   title: string;
   description: string;
   skills: string[];
+  imageUrl?: string;
 }
 
 export interface ContactSettings {

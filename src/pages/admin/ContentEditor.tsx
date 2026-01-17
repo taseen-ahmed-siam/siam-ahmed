@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Save, Loader2 } from 'lucide-react';
+import { Save, Loader2, Upload, X, Image as ImageIcon } from 'lucide-react';
 import { useSiteSettings, HeroSettings, AboutSettings, ContactSettings, SocialSettings } from '@/hooks/useSiteSettings';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { X } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const ContentEditor = () => {
   const heroSettings = useSiteSettings<HeroSettings>('hero');
@@ -22,6 +23,10 @@ const ContentEditor = () => {
   const [contact, setContact] = useState<ContactSettings | null>(null);
   const [social, setSocial] = useState<SocialSettings | null>(null);
   const [newSkill, setNewSkill] = useState('');
+  const [isUploadingHero, setIsUploadingHero] = useState(false);
+  const [isUploadingAbout, setIsUploadingAbout] = useState(false);
+  const heroFileInputRef = useRef<HTMLInputElement>(null);
+  const aboutFileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (heroSettings.data) setHero(heroSettings.data);
@@ -49,6 +54,49 @@ const ContentEditor = () => {
   const handleRemoveSkill = (index: number) => {
     if (about) {
       setAbout({ ...about, skills: about.skills.filter((_, i) => i !== index) });
+    }
+  };
+
+  const handleImageUpload = async (
+    file: File,
+    section: 'hero' | 'about',
+    setUploading: (v: boolean) => void,
+    updateState: (url: string) => void
+  ) => {
+    if (!file) return;
+    
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please upload an image file');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image must be less than 5MB');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${section}-${Date.now()}.${fileExt}`;
+      const filePath = `${section}/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('site-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('site-images')
+        .getPublicUrl(filePath);
+
+      updateState(publicUrl);
+      toast.success('Image uploaded successfully!');
+    } catch (error: any) {
+      toast.error('Failed to upload image: ' + error.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -130,6 +178,72 @@ const ContentEditor = () => {
                         />
                       </div>
                     </div>
+                    
+                    <div className="space-y-2">
+                      <Label>Hero Image</Label>
+                      <div className="flex flex-col gap-3">
+                        {hero.imageUrl ? (
+                          <div className="relative w-full max-w-md">
+                            <img 
+                              src={hero.imageUrl} 
+                              alt="Hero preview" 
+                              className="w-full h-48 object-cover rounded-lg border"
+                            />
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="icon"
+                              className="absolute top-2 right-2"
+                              onClick={() => setHero({ ...hero, imageUrl: '' })}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="w-full max-w-md h-48 border-2 border-dashed rounded-lg flex items-center justify-center bg-muted/50">
+                            <div className="text-center text-muted-foreground">
+                              <ImageIcon className="w-10 h-10 mx-auto mb-2 opacity-50" />
+                              <p className="text-sm">No image uploaded</p>
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <input
+                            type="file"
+                            ref={heroFileInputRef}
+                            className="hidden"
+                            accept="image/*"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                handleImageUpload(file, 'hero', setIsUploadingHero, (url) => 
+                                  setHero({ ...hero, imageUrl: url })
+                                );
+                              }
+                            }}
+                          />
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => heroFileInputRef.current?.click()}
+                            disabled={isUploadingHero}
+                          >
+                            {isUploadingHero ? (
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            ) : (
+                              <Upload className="w-4 h-4 mr-2" />
+                            )}
+                            Upload Image
+                          </Button>
+                        </div>
+                        <Input
+                          placeholder="Or paste image URL..."
+                          value={hero.imageUrl || ''}
+                          onChange={(e) => setHero({ ...hero, imageUrl: e.target.value })}
+                        />
+                      </div>
+                    </div>
+                    
                     <Button
                       onClick={() => heroSettings.update(hero)}
                       disabled={heroSettings.isUpdating}
@@ -204,6 +318,73 @@ const ContentEditor = () => {
                         </Button>
                       </div>
                     </div>
+                    
+                    <div className="space-y-2">
+                      <Label>Profile Image</Label>
+                      <div className="flex flex-col gap-3">
+                        {about.imageUrl ? (
+                          <div className="relative w-48 h-48">
+                            <img 
+                              src={about.imageUrl} 
+                              alt="Profile preview" 
+                              className="w-full h-full object-cover rounded-lg border"
+                            />
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="icon"
+                              className="absolute top-2 right-2"
+                              onClick={() => setAbout({ ...about, imageUrl: '' })}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="w-48 h-48 border-2 border-dashed rounded-lg flex items-center justify-center bg-muted/50">
+                            <div className="text-center text-muted-foreground">
+                              <ImageIcon className="w-10 h-10 mx-auto mb-2 opacity-50" />
+                              <p className="text-sm">No image</p>
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex gap-2">
+                          <input
+                            type="file"
+                            ref={aboutFileInputRef}
+                            className="hidden"
+                            accept="image/*"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                handleImageUpload(file, 'about', setIsUploadingAbout, (url) => 
+                                  setAbout({ ...about, imageUrl: url })
+                                );
+                              }
+                            }}
+                          />
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => aboutFileInputRef.current?.click()}
+                            disabled={isUploadingAbout}
+                          >
+                            {isUploadingAbout ? (
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            ) : (
+                              <Upload className="w-4 h-4 mr-2" />
+                            )}
+                            Upload Image
+                          </Button>
+                        </div>
+                        <Input
+                          placeholder="Or paste image URL..."
+                          value={about.imageUrl || ''}
+                          onChange={(e) => setAbout({ ...about, imageUrl: e.target.value })}
+                          className="max-w-md"
+                        />
+                      </div>
+                    </div>
+                    
                     <Button
                       onClick={() => aboutSettings.update(about)}
                       disabled={aboutSettings.isUpdating}
