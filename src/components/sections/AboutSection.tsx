@@ -48,6 +48,7 @@ const AboutSection = () => {
   const title = aboutSettings?.title || "About Me";
   const description = aboutSettings?.description || "With over 5 years of experience in web development and design, I specialize in creating digital experiences that are both visually stunning and highly functional.";
   const skills = aboutSettings?.skills || [];
+  const imageUrl = aboutSettings?.imageUrl;
 
   return (
     <section id="about" className="py-24 bg-card relative">
@@ -71,6 +72,28 @@ const AboutSection = () => {
             <br />
             <span className="text-gradient">Reality</span>
           </h2>
+          
+          {/* Profile Image */}
+          {imageUrl && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex justify-center mb-6"
+            >
+              <div className="relative">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
+                  <img 
+                    src={imageUrl} 
+                    alt="Profile" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-transparent pointer-events-none" />
+              </div>
+            </motion.div>
+          )}
+          
           <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg px-4">
             {description}
           </p>
