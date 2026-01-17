@@ -32,8 +32,9 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
+  // All hooks must be called before any conditional returns
   const { data: heroSettings, isLoading } = useSiteSettings<HeroSettings>('hero');
-
+  
   // Parallax transforms - different speeds for depth
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -41,7 +42,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Show skeleton while loading
+  // Show skeleton while loading (after all hooks are called)
   if (isLoading) {
     return <HeroSkeleton />;
   }
