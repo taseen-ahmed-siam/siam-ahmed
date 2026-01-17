@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles, Loader2 } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { useSiteSettings, HeroSettings } from "@/hooks/useSiteSettings";
+import { HeroSkeleton } from "@/components/ui/loading-skeletons";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,7 +41,12 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Default values while loading
+  // Show skeleton while loading
+  if (isLoading) {
+    return <HeroSkeleton />;
+  }
+
+  // Default values
   const title = heroSettings?.title || "Crafting Digital Experiences";
   const subtitle = heroSettings?.subtitle || "Creative Developer & Designer";
   const description = heroSettings?.description || "I'm a creative developer and designer passionate about building beautiful, functional websites and applications that make a lasting impression.";
