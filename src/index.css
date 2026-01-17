@@ -124,25 +124,44 @@
   }
 
   .card-hover {
-    @apply transition-all duration-500 ease-out;
+    @apply transition-all duration-300 ease-out;
   }
 
   .card-hover:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-glow), var(--shadow-card);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card);
   }
 
   .link-underline {
-    @apply relative;
+    @apply relative inline-block;
   }
 
   .link-underline::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary origin-bottom-right scale-x-0 transition-transform duration-300;
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 transition-transform duration-300 ease-out;
   }
 
   .link-underline:hover::after {
-    @apply origin-bottom-left scale-x-100;
+    @apply scale-x-100;
+  }
+
+  /* Interactive icon hover */
+  .icon-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .icon-hover:hover {
+    @apply text-primary scale-110;
+  }
+
+  /* Subtle press effect */
+  .press-effect {
+    @apply transition-transform duration-150 active:scale-95;
+  }
+
+  /* Smooth border glow on focus */
+  .focus-glow:focus-within {
+    @apply ring-2 ring-primary/30 ring-offset-2 ring-offset-background;
   }
 }
 
