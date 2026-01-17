@@ -41,7 +41,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to site owner
     const notificationResponse = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["delivered@resend.dev"], // Replace with your actual email
+      to: ["2022100000082@seu.edu.bd"], 
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <h1>New Contact Form Submission</h1>
