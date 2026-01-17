@@ -1,9 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { useSiteSettings, HeroSettings } from "@/hooks/useSiteSettings";
-import { HeroSkeleton } from "@/components/ui/loading-skeletons";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -32,9 +31,8 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  // All hooks must be called before any conditional returns
   const { data: heroSettings, isLoading } = useSiteSettings<HeroSettings>('hero');
-  
+
   // Parallax transforms - different speeds for depth
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -42,12 +40,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Show skeleton while loading (after all hooks are called)
-  if (isLoading) {
-    return <HeroSkeleton />;
-  }
-
-  // Default values
+  // Default values while loading
   const title = heroSettings?.title || "Crafting Digital Experiences";
   const subtitle = heroSettings?.subtitle || "Creative Developer & Designer";
   const description = heroSettings?.description || "I'm a creative developer and designer passionate about building beautiful, functional websites and applications that make a lasting impression.";

@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Palette, Lightbulb, Zap } from "lucide-react";
 import { useSiteSettings, AboutSettings } from "@/hooks/useSiteSettings";
-import { AboutSkeleton } from "@/components/ui/loading-skeletons";
 
 const defaultSkills = [
   { icon: Code2, title: "Development", description: "Clean, efficient code using modern frameworks and best practices" },
@@ -44,12 +43,7 @@ const statVariants = {
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { data: aboutSettings, isLoading } = useSiteSettings<AboutSettings>('about');
-
-  // Show skeleton while loading
-  if (isLoading) {
-    return <AboutSkeleton />;
-  }
+  const { data: aboutSettings } = useSiteSettings<AboutSettings>('about');
 
   const title = aboutSettings?.title || "About Me";
   const description = aboutSettings?.description || "With over 5 years of experience in web development and design, I specialize in creating digital experiences that are both visually stunning and highly functional.";

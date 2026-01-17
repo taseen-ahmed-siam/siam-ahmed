@@ -1,8 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { Calendar, Clock, ArrowRight, X } from "lucide-react";
+import { Calendar, Clock, ArrowRight, X, Loader2 } from "lucide-react";
 import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
-import { BlogSkeleton } from "@/components/ui/loading-skeletons";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -88,7 +87,9 @@ const BlogSection = () => {
         </motion.div>
 
         {isLoading ? (
-          <BlogSkeleton />
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
         ) : blogPosts && blogPosts.length > 0 ? (
           <motion.div
             variants={containerVariants}
