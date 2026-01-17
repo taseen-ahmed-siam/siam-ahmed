@@ -106,9 +106,9 @@ const ContactSection = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, title: "Email", value: "hello@example.com", href: "mailto:hello@example.com" },
-    { icon: Phone, title: "Phone", value: "+1 (234) 567-890", href: "tel:+1234567890" },
-    { icon: MapPin, title: "Location", value: "San Francisco, CA", href: null },
+    { icon: Mail, title: "Email", value: "2022100000082@seu.edu.bd", href: "mailto:2022100000082@seu.edu.bd" },
+    { icon: Phone, title: "Phone", value: "+01948083304", href: "tel:+01948083304" },
+    { icon: MapPin, title: "Location", value: "Demra, Dhaka, BD", href: null },
   ];
 
   return (
