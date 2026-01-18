@@ -46,7 +46,7 @@ const AboutSection = () => {
   const { data: aboutSettings } = useSiteSettings<AboutSettings>('about');
 
   const title = aboutSettings?.title || "About Me";
-  const description = aboutSettings?.description || "With over 5 years of experience in web development and design, I specialize in creating digital experiences that are both visually stunning and highly functional.";
+  const description = aboutSettings?.description || "With over 3 years of experience in web development and design, I specialize in creating digital experiences that are both visually stunning and highly functional.";
   const skills = aboutSettings?.skills || [];
   const imageUrl = aboutSettings?.imageUrl;
 
