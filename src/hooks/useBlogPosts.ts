@@ -31,7 +31,9 @@ export const useBlogPosts = (includeUnpublished = false) => {
       
       if (error) throw error;
       return data as BlogPost[];
-    }
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes cache
   });
 };
 
@@ -48,7 +50,9 @@ export const useBlogPost = (id: string) => {
       if (error) throw error;
       return data as BlogPost;
     },
-    enabled: !!id
+    enabled: !!id,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 30, // 30 minutes cache
   });
 };
 
