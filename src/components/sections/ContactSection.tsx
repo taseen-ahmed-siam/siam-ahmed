@@ -107,7 +107,7 @@ const ContactSection = () => {
 
   const contactInfo = [
     { icon: Mail, title: "Email", value: "2022100000082@seu.edu.bd", href: "mailto:2022100000082@seu.edu.bd" },
-    { icon: Phone, title: "Phone", value: "+8801948083304", href: "tel:+8801948083304" },
+    { icon: Phone, title: "Phone", value: "+01948083304", href: "tel:+01948083304" },
     { icon: MapPin, title: "Location", value: "Demra, Dhaka, BD", href: null },
   ];
 

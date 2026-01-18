@@ -5,60 +5,29 @@ import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
 const testimonials = [
   {
     id: 1,
-    name: "Daniel Carter",
-    role: "Startup Founder",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
-    content:
-      "Working with Siam was a great experience. He understood our requirements clearly and delivered a clean, fast, and reliable full-stack solution. Communication was smooth throughout the project.",
+    name: "Sarah Johnson",
+    role: "CEO, TechStart",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    content: "Working with this developer was an absolute pleasure. They delivered a stunning website that exceeded our expectations and drove real results for our business.",
     rating: 5,
   },
   {
     id: 2,
-    name: "Ayesha Rahman",
-    role: "Product Manager",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
-    content:
-      "The project was delivered on time with well-structured code and excellent performance. Siam’s attention to detail and problem-solving skills really stood out.",
+    name: "Michael Chen",
+    role: "Founder, DesignHub",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    content: "Incredible attention to detail and a deep understanding of user experience. Our conversion rates improved by 40% after the redesign.",
     rating: 5,
   },
   {
     id: 3,
-    name: "Michael Thompson",
-    role: "Senior Software Engineer",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face",
-    content:
-      "Siam writes clean, maintainable code and understands both frontend and backend workflows deeply. He’s reliable, efficient, and easy to collaborate with.",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "Nusrat Jahan",
-    role: "Academic Project Mentor",
+    name: "Emily Rodriguez",
+    role: "Marketing Director, GrowthCo",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-    content:
-      "Siam consistently delivers high-quality projects with modern UI and strong backend logic. His ability to turn ideas into working applications is impressive.",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: "Ryan Patel",
-    role: "Team Lead",
-    image: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=face",
-    content:
-      "From database design to frontend interaction, Siam handled everything smoothly. A solid full-stack developer with strong technical judgment.",
-    rating: 5,
-  },
-  {
-    id: 6,
-    name: "Jessica Lee",
-    role: "Peer Developer",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face",
-    content:
-      "He approaches problems logically and always looks for scalable solutions. His full-stack projects reflect both technical skill and creativity.",
+    content: "Professional, responsive, and incredibly talented. They took our vision and transformed it into a beautiful, functional website that our customers love.",
     rating: 5,
   },
 ];
-
 
 const slideVariants = {
   enter: (direction: number) => ({

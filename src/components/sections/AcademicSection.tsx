@@ -9,12 +9,12 @@ const educationData = [
     location: "Dhaka, Bangladesh",
     period: "2022 - Present",
     description: "Pursuing a comprehensive curriculum in computer science fundamentals, software engineering, and modern development practices.",
-    achievements: ["Active Member - Research Cell", "Active Member - SSSC Club"],
+    achievements: ["Dean's List", "Active Member - Programming Club"],
     current: true,
   },
   {
     degree: "Higher Secondary Certificate (HSC)",
-    institution: "Birshreshtha Munshi Abdur Rouf Public College",
+    institution: "Ideal College",
     location: "Dhaka, Bangladesh",
     period: "2019 - 2021",
     description: "Completed higher secondary education with focus on Science group, building strong foundation in mathematics and physics.",
@@ -23,7 +23,7 @@ const educationData = [
   },
   {
     degree: "Secondary School Certificate (SSC)",
-    institution: "Shamsul Hoque Khan School & College",
+    institution: "Demra Public School",
     location: "Dhaka, Bangladesh",
     period: "2017 - 2019",
     description: "Completed secondary education with excellent academic performance and active participation in extracurricular activities.",

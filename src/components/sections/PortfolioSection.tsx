@@ -7,16 +7,16 @@ const projects = [
     id: 1,
     title: "E-Commerce Platform",
     category: "Web Development",
-    description: "Kitter is a fully responsive petshop ecommerce website, Responsive for all devices, build using HTML, CSS, and JavaScript.",
-    image: "https://repository-images.githubusercontent.com/532541152/f5707594-fb80-431d-9988-81a54e9455fe",
-    tags: ["HTML", "CSS", "JavaScript"],
+    description: "A modern e-commerce solution with seamless checkout experience",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+    tags: ["React", "Node.js", "Stripe"],
   },
   {
     id: 2,
     title: "Brand Identity System",
     category: "Design",
     description: "Complete brand overhaul for a tech startup",
-    image: "https://annenbergdl.org/wp-content/uploads/2025/01/ui-ux-design-figma-series.png",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
     tags: ["Branding", "UI/UX", "Figma"],
   },
   {
@@ -29,13 +29,28 @@ const projects = [
   },
   {
     id: 4,
-    title: "Coffee Shop System Management",
+    title: "SaaS Dashboard",
     category: "Web Development",
     description: "Analytics dashboard with real-time data visualization",
-    image: "https://user-images.githubusercontent.com/83401742/225241643-a2d01358-c8a1-476d-9cbf-509751499887.png",
-    tags: ["Java", "CSS"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    tags: ["Vue.js", "D3.js", "PostgreSQL"],
   },
-  
+  {
+    id: 5,
+    title: "Restaurant Website",
+    category: "Design",
+    description: "Elegant website for a fine dining restaurant",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop",
+    tags: ["WordPress", "PHP", "Custom Theme"],
+  },
+  {
+    id: 6,
+    title: "Fitness Tracking App",
+    category: "App Development",
+    description: "Health and fitness companion with workout plans",
+    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&h=400&fit=crop",
+    tags: ["Flutter", "Dart", "Health API"],
+  },
 ];
 
 const containerVariants = {
