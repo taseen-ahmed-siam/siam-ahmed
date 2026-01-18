@@ -19,7 +19,7 @@ const Footer = () => {
         <div className="flex flex-col items-center gap-6 sm:gap-8 md:flex-row md:justify-between">
           <div className="text-center md:text-left">
             <h3 className="text-xl sm:text-2xl font-display font-bold text-gradient mb-2">
-              Portfolio
+              {"{S.Ahmed}"}
             </h3>
             <p className="text-muted-foreground text-xs sm:text-sm">
               Creating digital experiences that inspire
