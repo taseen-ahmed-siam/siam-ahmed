@@ -52,7 +52,9 @@ export const useSiteSettings = <T>(key: SettingsKey) => {
       
       if (error) throw error;
       return data?.value as T;
-    }
+    },
+    staleTime: 1000 * 60 * 10, // 10 minutes - settings change rarely
+    gcTime: 1000 * 60 * 60, // 1 hour cache
   });
 
   const mutation = useMutation({
@@ -104,6 +106,8 @@ export const useAllSiteSettings = () => {
         social: SocialSettings;
         theme: ThemeSettings;
       };
-    }
+    },
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 60, // 1 hour cache
   });
 };
