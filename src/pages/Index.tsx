@@ -7,8 +7,11 @@ import PortfolioSection from "@/components/sections/PortfolioSection";
 import BlogSection from "@/components/sections/BlogSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ContactSection from "@/components/sections/ContactSection";
+import { usePrefetchSiteData } from "@/hooks/usePrefetchSiteData";
 
 const Index = () => {
+  // Prefetch all site data on mount for faster loading
+  usePrefetchSiteData();
   return (
     <div className="min-h-screen bg-background">
       <Header />
