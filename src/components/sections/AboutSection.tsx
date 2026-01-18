@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Palette, Lightbulb, Zap } from "lucide-react";
 import { useSiteSettings, AboutSettings } from "@/hooks/useSiteSettings";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const defaultSkills = [
   { icon: Code2, title: "Development", description: "Clean, efficient code using modern frameworks and best practices" },
@@ -44,36 +43,10 @@ const statVariants = {
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { data: aboutSettings, isLoading } = useSiteSettings<AboutSettings>('about');
-
-  // Show skeleton while loading
-  if (isLoading) {
-    return (
-      <section id="about" className="py-24 bg-card relative">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <Skeleton className="h-4 w-24 mx-auto mb-4" />
-            <Skeleton className="h-12 w-64 mx-auto mb-4" />
-            <Skeleton className="h-12 w-48 mx-auto mb-6" />
-            <Skeleton className="h-5 w-full max-w-2xl mx-auto" />
-            <Skeleton className="h-5 w-3/4 max-w-xl mx-auto mt-2" />
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-background rounded-xl p-4 sm:p-6 border border-border">
-                <Skeleton className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg mb-3 sm:mb-4" />
-                <Skeleton className="h-6 w-24 mb-2" />
-                <Skeleton className="h-4 w-full" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const { data: aboutSettings } = useSiteSettings<AboutSettings>('about');
 
   const title = aboutSettings?.title || "About Me";
-  const description = aboutSettings?.description || "";
+  const description = aboutSettings?.description || "With over 5 years of experience in web development and design, I specialize in creating digital experiences that are both visually stunning and highly functional.";
   const skills = aboutSettings?.skills || [];
   const imageUrl = aboutSettings?.imageUrl;
 
